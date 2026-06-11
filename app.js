@@ -455,3 +455,28 @@ function escapeHTML(str) {
     }[tag] || tag)
   );
 }
+
+// Toggle FAQ item visibility (Accordion)
+function toggleFaq(btnElement) {
+  const faqItem = btnElement.parentElement;
+  if (!faqItem) return;
+  
+  const faqAnswer = faqItem.querySelector('.faq-answer');
+  if (!faqAnswer) return;
+  
+  const isActive = faqItem.classList.contains('active');
+  
+  // Close all other FAQ items first
+  const allItems = document.querySelectorAll('.faq-item');
+  allItems.forEach(item => {
+    item.classList.remove('active');
+    const answer = item.querySelector('.faq-answer');
+    if (answer) answer.style.maxHeight = null;
+  });
+  
+  // Toggle the clicked one
+  if (!isActive) {
+    faqItem.classList.add('active');
+    faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+  }
+}

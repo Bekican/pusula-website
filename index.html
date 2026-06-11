@@ -49,6 +49,56 @@
     }
   }
   </script>
+
+  <!-- JSON-LD FAQ Schema (For GEO/LLM search engine answer extraction) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Pusula nedir ve nasıl çalışır?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pusula, bilgisayarınızın panosunu, dosyalarını ve Downloads klasörünü Rust-Native otomasyonu ile izleyen bir kişisel üretkenlik aracıdır. Yakalanan bilgileri yerel yapay zeka ile anında sınıflandırıp yerel SQLite kasanıza kaydeder."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Pusula verileri buluta yüklüyor mu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hayır, Pusula %100 yerel (local-first) gizlilik prensibiyle çalışır. Notlarınız, linkleriniz ve hassas verileriniz hiçbir sunucuya yüklenmez, cihazınız dışına asla çıkmaz ve diskinizdeki şifreli SQLite veritabanında saklanır."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Pusula arka planda çalışırken bilgisayarı yavaşlatır mı?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pusula, son derece yüksek performanslı ve hafif olan Rust diliyle ve native Tauri kütüphanesiyle geliştirilmiştir. Arka planda çalışırken neredeyse sıfır CPU ve çok düşük RAM tüketerek sistem kaynaklarınızı yormaz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Pusula SQLite veritabanına doğrudan erişebilir miyim?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Evet. Pusula, kilitli veri formatları kullanmaz. Verileriniz standart yerel SQLite veritabanında tutulur; dilediğiniz an veritabanı dosyalarınızı başka araçlara aktarabilir ve verilerinizin kontrolünü tamamen elinizde tutabilirsiniz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Pusula Pro sürümü neleri içerir ve abonelik gerektirir mi?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pusula Pro abonelik gerektirmez, tek seferlik ödeme ile ömür boyu lisans sağlar. Pro sürüm; limitsiz çalışma alanı, limitsiz kasa kaydı, tam otomatik pano/klasör izleme, akıllı RAG/PDF özetleme ve AES-GCM şifreli cihazlar arası yerel ağ eşlemesi (sync) özelliklerini sunar."
+        }
+      }
+    ]
+  }
+  </script>
   
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -502,6 +552,26 @@
             <p>Cihazlar arası veri transferleri AES-GCM ile şifrelenir ve yerel ağ üzerinden doğrudan cihazlarınız arasında aktarılır.</p>
           </div>
         </div>
+
+        <!-- Structured Technical Specs (For GEO/LLM retrieval optimization) -->
+        <div class="tech-specs-grid">
+          <div class="tech-spec-item">
+            <span class="spec-label">Çekirdek:</span>
+            <span class="spec-value">Rust & Tauri (Native)</span>
+          </div>
+          <div class="tech-spec-item">
+            <span class="spec-label">Depolama:</span>
+            <span class="spec-value">Yerel SQLite Veritabanı</span>
+          </div>
+          <div class="tech-spec-item">
+            <span class="spec-label">Şifreleme:</span>
+            <span class="spec-value">AES-256-GCM / PBKDF2</span>
+          </div>
+          <div class="tech-spec-item">
+            <span class="spec-label">Bulut İletişimi:</span>
+            <span class="spec-value">Yok (%100 Yerel Veri)</span>
+          </div>
+        </div>
       </div>
       
       <!-- Visual Flow -->
@@ -611,6 +681,81 @@
       </div>
       <div class="verify-notice">
         Buraya satın aldığınız Pro lisans kodunu girerek (veya varsayılan deneme kodunu kullanarak) Pro sürümün web sitemizde nasıl aktif olduğunu simüle edebilirsiniz.
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION (For GEO / AI search engine crawlers & user clarity) -->
+  <section id="faq">
+    <div class="section-header">
+      <h2>Sıkça Sorulan Sorular</h2>
+      <p>Pusula ile ilgili merak edilenleri, yerel güvenlik altyapısını ve otomasyon detaylarını inceleyin.</p>
+    </div>
+    
+    <div class="faq-container">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Pusula nedir ve nasıl çalışır?
+          <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Pusula, bilgisayarınızın panosunu, dosyalarını ve indirme klasörünü Rust-Native otomasyonu ile izleyen bir kişisel üretkenlik aracıdır. Yakalanan bilgileri yerel yapay zeka ile anında sınıflandırıp yerel SQLite kasanıza kaydeder.
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 2 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Verilerim buluta veya sunuculara yükleniyor mu?
+          <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Hayır. Pusula <strong>%100 yerel (local-first)</strong> mimari üzerine inşa edilmiştir. Verileriniz asla bir sunucuya gitmez, diskinizde SQLite veritabanında saklanır. Hatta cihazlar arası senkronizasyon (sync) işlemi bile yerel ağınız üzerinden uçtan uca AES-GCM şifreleme ile doğrudan cihazlarınız arasında gerçekleşir.
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 3 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Pusula arka planda bilgisayarımı yavaşlatır mı?
+          <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Kesinlikle hayır. Pusula, performansıyla ünlü <strong>Rust</strong> diliyle ve native <strong>Tauri</strong> kütüphanesiyle derlenmiştir. Bu sayede Electron tabanlı araçların aksine arka planda çalışırken neredeyse sıfır işlemci (CPU) ve son derece az bellek (RAM) tüketir.
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 4 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Verilerime harici araçlarla erişebilir miyim yoksa kilitli mi?
+          <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Verileriniz tamamen size aittir ve açık kaynak standartlarına sahip <strong>SQLite</strong> veritabanı formatında saklanır. Pusula sizi tek bir platforma hapsetmez (no vendor lock-in). İstediğiniz an veritabanı dosyasını açıp başka araçlara entegre edebilir veya dışa aktarabilirsiniz.
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 5 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Pusula Pro lisansı abonelik tabanlı mı?
+          <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Hayır, Pusula Pro <strong>tek seferlik ödeme</strong> modeliyle satılır. Aylık veya yıllık abonelik ücreti yoktur. Bir kez satın alarak ömür boyu sınırsız kullanım hakkına sahip olursunuz.
+          </div>
+        </div>
       </div>
     </div>
   </section>
