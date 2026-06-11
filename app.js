@@ -1,3 +1,13 @@
+// Mobile navigation drawer toggle
+function toggleMobileMenu() {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  if (!toggleBtn || !drawer) return;
+  
+  toggleBtn.classList.toggle('open');
+  drawer.classList.toggle('open');
+}
+
 // Toast Notification System
 function showToast(message, type = 'info') {
   const container = document.getElementById('toast-root');
@@ -31,6 +41,54 @@ function showToast(message, type = 'info') {
       toast.remove();
     }, 300);
   }, 3000);
+}
+
+// Add Dynamic Vault record animation
+function addVisualRecord(text, typeLabel) {
+  const activeVisual = document.querySelector('.space-panel.active .space-visual');
+  if (!activeVisual) return;
+  
+  let displayText = text;
+  if (displayText.length > 40) {
+    displayText = displayText.substring(0, 38) + '...';
+  }
+  
+  const fileRow = document.createElement('div');
+  fileRow.className = 'file-row animate-fadeInUp';
+  fileRow.style.background = 'rgba(244, 63, 94, 0.08)';
+  fileRow.style.transition = 'background 1.5s ease';
+  
+  let iconSvg = `<svg class="file-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>`;
+  if (typeLabel.includes('LİNK')) {
+    iconSvg = `<svg class="file-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 002.502-2.502m0 0l.228-.228m-2.228 2.228l-2.228 2.228m-1.414-1.414l2.228-2.228m0 0L14.657 5.343a4 4 0 015.656 5.656L18 13"/></svg>`;
+  } else if (typeLabel.includes('KOMUT')) {
+    iconSvg = `<svg class="file-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`;
+  } else if (typeLabel.includes('OKUL') || typeLabel.includes('MATERYAL')) {
+    iconSvg = `<svg class="file-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`;
+  }
+  
+  fileRow.innerHTML = `
+    ${iconSvg}
+    <span class="file-name">${escapeHTML(displayText)}</span>
+    <span class="file-meta" style="color: var(--accent); font-weight: 600;">Eklendi ✓</span>
+  `;
+  
+  const header = activeVisual.querySelector('.visual-header');
+  if (header) {
+    header.parentNode.insertBefore(fileRow, header.nextSibling);
+  } else {
+    activeVisual.appendChild(fileRow);
+  }
+  
+  setTimeout(() => {
+    fileRow.style.background = 'transparent';
+    const meta = fileRow.querySelector('.file-meta');
+    if (meta) {
+      meta.textContent = 'SQLite Kasa';
+      meta.style.color = 'var(--text-tertiary)';
+      meta.style.fontWeight = '400';
+    }
+  }, 1500);
 }
 
 // SIMULATOR PRESETS DATA
@@ -167,40 +225,68 @@ function triggerCapture(presetData = null) {
     classification = classifyInput(text);
   }
   
-  // Create unique ID for cards
-  const cardId = 'captured-card-' + Date.now();
-  
-  // Create Card Element
-  const card = document.createElement('div');
-  card.className = 'captured-card';
-  card.id = cardId;
-  
-  card.innerHTML = `
-    <div class="card-top">
-      <div class="card-meta">
-        <span class="card-tag ${classification.tagClass}">${classification.tagLabel}</span>
-        <span class="card-source">${classification.sourceLabel}</span>
-      </div>
-    </div>
-    <div class="card-body">${escapeHTML(text)}</div>
-    <div class="card-recommendation">
-      <span class="rec-dot"></span>
-      <span>${classification.recLabel}</span>
-    </div>
-    <div class="card-actions">
-      <button class="action-btn action-btn-primary" onclick="saveToVault('${cardId}')">Kasaya Kaydet</button>
-      <button class="action-btn action-btn-secondary" onclick="discardCaptured('${cardId}')">Yoksay</button>
-    </div>
-  `;
-  
-  // Insert at top of inbox
-  inbox.insertBefore(card, inbox.firstChild);
-  
-  // Clear textarea
+  // Clear textarea immediately
   textarea.value = '';
   
-  // Toast alert showing capture event
-  showToast(`Otomasyon algıladı: "${classification.sourceLabel}" üzerinden yeni veri yakalandı!`, 'info');
+  // Create unique ID for loader and card
+  const loaderId = 'loader-' + Date.now();
+  const cardId = 'captured-card-' + Date.now();
+  
+  // Create Skeleton Loader
+  const loader = document.createElement('div');
+  loader.className = 'skeleton-loader';
+  loader.id = loaderId;
+  loader.innerHTML = `
+    <div class="skeleton-header-row">
+      <div class="skeleton-bar skeleton-bar-tag"></div>
+      <div class="skeleton-bar skeleton-bar-source"></div>
+    </div>
+    <div class="skeleton-bar skeleton-bar-line1"></div>
+    <div class="skeleton-bar skeleton-bar-line2"></div>
+    <div class="skeleton-bar-status">AI Sınıflandırıyor...</div>
+  `;
+  
+  // Insert loader at top of inbox
+  inbox.insertBefore(loader, inbox.firstChild);
+  
+  // Toast alerting classification progress
+  showToast(`Otomasyon algıladı: "${classification.sourceLabel}" verisi yapay zeka ile analiz ediliyor...`, 'info');
+  
+  // Simulated processing delay
+  setTimeout(() => {
+    // Remove loader
+    const loaderElem = document.getElementById(loaderId);
+    if (loaderElem) loaderElem.remove();
+    
+    // Create Card Element
+    const card = document.createElement('div');
+    card.className = 'captured-card';
+    card.id = cardId;
+    
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="card-tag ${classification.tagClass}">${classification.tagLabel}</span>
+          <span class="card-source">${classification.sourceLabel}</span>
+        </div>
+      </div>
+      <div class="card-body">${escapeHTML(text)}</div>
+      <div class="card-recommendation">
+        <span class="rec-dot"></span>
+        <span>${classification.recLabel}</span>
+      </div>
+      <div class="card-actions">
+        <button class="action-btn action-btn-primary" onclick="saveToVault('${cardId}')">Kasaya Kaydet</button>
+        <button class="action-btn action-btn-secondary" onclick="discardCaptured('${cardId}')">Yoksay</button>
+      </div>
+    `;
+    
+    // Insert card at top of inbox
+    inbox.insertBefore(card, inbox.firstChild);
+    
+    // Success toast
+    showToast(`Veri başarıyla sınıflandırıldı: ${classification.tagLabel}`, 'success');
+  }, 750);
 }
 
 // SAVE TO VAULT SIMULATION
@@ -213,8 +299,17 @@ function saveToVault(cardId) {
   card.style.transition = 'all 0.3s ease';
   
   setTimeout(() => {
+    const textElem = card.querySelector('.card-body');
+    const tagElem = card.querySelector('.card-tag');
+    
+    const text = textElem ? textElem.textContent : '';
+    const tag = tagElem ? tagElem.textContent : 'NOT';
+    
     card.remove();
     checkInboxEmpty();
+    
+    // Dynamic record addition
+    addVisualRecord(text, tag);
   }, 300);
   
   showToast("Kayıt güvenli yerel SQLite veritabanına kaydedildi!", "success");

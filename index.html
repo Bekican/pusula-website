@@ -5,12 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pusula - Kişisel Otomasyon ve Güvenli Yerel Kasa</title>
   <meta name="description" content="Pusula; dağınık not, dosya, link ve kopyaladığınız verileri yakalar, yapay zeka ile sınıflandırır ve tek tıkla güvenli yerel SQLite kasanıza kaydeder.">
+  <meta name="keywords" content="pusula, kişisel otomasyon, SQLite kasa, pano dinleyici, klasör izleyici, yerel RAG, yapay zeka not, Rust otomasyon, yerel veritabanı, güvenli kasa, tauri, rust">
+  <meta name="author" content="Bekir Can">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://bekican.github.io/pusula-website/">
   
   <!-- SEO & Social Meta Tags -->
   <meta property="og:title" content="Pusula - Kişisel Otomasyon ve Güvenli Yerel Kasa">
   <meta property="og:description" content="Rust-Native otomasyon servisleriyle panonuzu ve dosyalarınızı izleyin, yapay zeka ile çalışma düzeninizi oluşturun.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/hero.png">
+  <meta property="og:url" content="https://bekican.github.io/pusula-website/">
+  <meta property="og:image" content="https://bekican.github.io/pusula-website/assets/hero.png">
+  <meta property="og:site_name" content="Pusula">
+  <meta property="og:locale" content="tr_TR">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pusula - Kişisel Otomasyon ve Güvenli Yerel Kasa">
+  <meta name="twitter:description" content="Pusula; dağınık not, dosya, link ve kopyaladığınız verileri yakalar, yapay zeka ile sınıflandırır ve tek tıkla güvenli yerel SQLite kasanıza kaydeder.">
+  <meta name="twitter:image" content="https://bekican.github.io/pusula-website/assets/hero.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pusula",
+    "operatingSystem": "Windows 10, Windows 11",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Bilgisayarınızın panosunu, dosyalarını ve Downloads klasörünü Rust-Native otomasyonu ile izleyin. Yakalanan bilgileri yapay zeka ile anında sınıflandırıp yerel kasanıza kaydedin.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "TRY",
+      "lowPrice": "0",
+      "highPrice": "249",
+      "offerCount": "2"
+    },
+    "downloadUrl": "https://bekican.github.io/pusula-website/downloads/Pusula_x64-setup.exe",
+    "screenshot": "https://bekican.github.io/pusula-website/assets/hero.png",
+    "author": {
+      "@type": "Person",
+      "name": "Bekir Can"
+    }
+  }
+  </script>
   
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -25,7 +63,7 @@
   <!-- HEADER / NAVBAR -->
   <header>
     <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="logo-icon" width="28" height="28" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M512 88L798 224C830 239 852 269 856 304C887 599 757 816 512 936C267 816 137 599 168 304C172 269 194 239 226 224L512 88Z"
           stroke="var(--accent)"
@@ -41,7 +79,7 @@
       </svg>
       Pusula
     </div>
-    <nav>
+    <nav class="desktop-nav">
       <a href="#features" class="nav-link">Özellikler</a>
       <a href="#simulator" class="nav-link">Nasıl Çalışır</a>
       <a href="#spaces" class="nav-link">Alanlar</a>
@@ -49,7 +87,24 @@
       <a href="#pricing" class="nav-link">Fiyatlandırma</a>
       <button class="nav-cta" onclick="simulateDownload()">Ücretsiz İndir</button>
     </nav>
+    <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Menüyü Aç/Kapat" onclick="toggleMobileMenu()">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
   </header>
+
+  <!-- MOBILE DRAWER NAVIGATION -->
+  <div class="mobile-drawer" id="mobile-nav-drawer">
+    <nav class="mobile-drawer-nav">
+      <a href="#features" class="mobile-nav-link" onclick="toggleMobileMenu()">Özellikler</a>
+      <a href="#simulator" class="mobile-nav-link" onclick="toggleMobileMenu()">Nasıl Çalışır</a>
+      <a href="#spaces" class="mobile-nav-link" onclick="toggleMobileMenu()">Alanlar</a>
+      <a href="#security" class="mobile-nav-link" onclick="toggleMobileMenu()">Güvenlik</a>
+      <a href="#pricing" class="mobile-nav-link" onclick="toggleMobileMenu()">Fiyatlandırma</a>
+      <button class="mobile-nav-cta" onclick="simulateDownload(); toggleMobileMenu()">Ücretsiz İndir</button>
+    </nav>
+  </div>
 
   <!-- HERO SECTION -->
   <section id="hero">
@@ -72,7 +127,7 @@
       </a>
     </div>
     <div class="hero-visual">
-      <img src="assets/hero.png" alt="Pusula Masaüstü Uygulaması Arayüzü">
+      <img src="assets/hero.png" alt="Pusula Masaüstü Uygulaması Arayüzü" width="960" height="540">
     </div>
   </section>
 
@@ -124,25 +179,52 @@
         </div>
       </div>
       
-      <!-- Display Screen -->
-      <div class="sim-display-panel">
-        <div class="sim-display-header">
-          <div class="sim-header-title">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-            Yakalananlar (Otomasyon Havuzu)
+      <!-- Display Screen (Desktop App Mockup) -->
+      <div class="sim-display-panel mock-window">
+        <div class="sim-display-header window-titlebar">
+          <div class="window-controls">
+            <span class="window-dot red"></span>
+            <span class="window-dot yellow"></span>
+            <span class="window-dot green"></span>
           </div>
-          <div class="sim-header-dots">
-            <span class="sim-dot"></span>
-            <span class="sim-dot"></span>
-            <span class="sim-dot sim-dot-active"></span>
+          <div class="sim-header-title window-title">
+            <svg class="icon-subtle" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Pusula Desktop - Yerel Kasa
           </div>
+          <div class="window-spacer"></div>
         </div>
         
-        <div id="sim-inbox" class="sim-display-content">
-          <!-- Empty State -->
-          <div class="sim-empty-state" id="sim-empty">
-            <svg class="sim-empty-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
-            <p>Pusula otomasyon havuzu şu an boş.<br>Soldan bir eylem tetikleyerek yakalamayı izleyin.</p>
+        <div class="mock-app-body">
+          <!-- App Sidebar -->
+          <div class="mock-sidebar">
+            <div class="sidebar-item active">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+              Gelen Havuzu
+            </div>
+            <div class="sidebar-item">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              Güvenli Kasa
+            </div>
+            <div class="sidebar-item">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Ayarlar
+            </div>
+            
+            <div class="sidebar-status">
+              <span class="status-indicator"></span>
+              Otomasyon Aktif
+            </div>
+          </div>
+          
+          <!-- App Content View -->
+          <div class="mock-content-view">
+            <div id="sim-inbox" class="sim-display-content">
+              <!-- Empty State -->
+              <div class="sim-empty-state" id="sim-empty">
+                <svg class="sim-empty-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                <p>Pusula otomasyon havuzu şu an boş.<br>Soldan bir eylem tetikleyerek yakalamayı izleyin.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
