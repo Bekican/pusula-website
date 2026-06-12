@@ -177,7 +177,177 @@
       </a>
     </div>
     <div class="hero-visual">
-      <img src="assets/hero.png" alt="Pusula Masaüstü Uygulaması Arayüzü" width="960" height="540">
+      <!-- Titlebar -->
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <span class="window-dot red"></span>
+          <span class="window-dot yellow"></span>
+          <span class="window-dot green"></span>
+        </div>
+        <div class="window-title">
+          <svg class="logo-icon" width="14" height="14" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: none; width: 14px; height: 14px; margin-right: 2px;">
+            <path
+              d="M512 88L798 224C830 239 852 269 856 304C887 599 757 816 512 936C267 816 137 599 168 304C172 269 194 239 226 224L512 88Z"
+              stroke="var(--accent)"
+              stroke-width="76"
+              stroke-linejoin="round"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M512 260L609 524L512 820L415 524L512 260ZM512 474C484.386 474 462 496.386 462 524C462 551.614 484.386 574 512 574C539.614 574 562 551.614 562 524C562 496.386 539.614 474 512 474Z"
+              fill="#FFFFFF"
+            />
+          </svg>
+          Pusula Desktop
+        </div>
+        <div class="window-sync-status">
+          <span class="sync-status-dot"></span>
+          <span>AES-GCM Sync Aktif</span>
+        </div>
+      </div>
+
+      <!-- App body -->
+      <div class="mock-app-body">
+        <!-- Sidebar -->
+        <div class="mock-sidebar">
+          <div class="sidebar-item active">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+            Gelen Havuzu
+          </div>
+          <div class="sidebar-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Güvenli Kasa
+          </div>
+          <div class="sidebar-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Okul Arşivi
+          </div>
+          
+          <div class="sidebar-separator"></div>
+
+          <div class="sidebar-title">Alanlarım</div>
+          <div class="sidebar-space-item">
+            <span class="space-dot bg-emerald"></span>
+            Okul / Dersler
+          </div>
+          <div class="sidebar-space-item">
+            <span class="space-dot bg-indigo"></span>
+            Proje / Pusula
+          </div>
+          <div class="sidebar-space-item">
+            <span class="space-dot bg-orange"></span>
+            Kişisel Arşiv
+          </div>
+
+          <div class="sidebar-status" style="margin-top: auto; border: 1px solid rgba(16, 185, 129, 0.2); background: rgba(16, 185, 129, 0.05); color: var(--emerald); font-weight: 600;">
+            <span class="status-indicator"></span>
+            Pano İzleyici Aktif
+          </div>
+        </div>
+
+        <!-- Main Workspace Area -->
+        <div class="mock-main-content">
+          <!-- Topbar -->
+          <div class="mock-topbar">
+            <div class="mock-search-bar">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <span>Hızlı arama yapın (Not, link, komut)...</span>
+            </div>
+            <div class="mock-topbar-actions">
+              <span class="mock-badge-pro">PRO SÜRÜM</span>
+            </div>
+          </div>
+
+          <!-- Column view -->
+          <div class="mock-columns-container">
+            <!-- Left Stream Column -->
+            <div class="mock-column-left">
+              <div class="mock-section-title">Gelen Havuzu (Son Yakalananlar)</div>
+              
+              <div class="mock-card card-animate-1">
+                <div class="mock-card-header">
+                  <span class="mock-card-tag tag-link">LİNK</span>
+                  <span class="mock-card-time">Şimdi</span>
+                </div>
+                <div class="mock-card-body">https://github.com/bekican/data-structures-notes</div>
+                <div class="mock-card-recommendation">
+                  ⚡ Okul ders arşivi alanına eklenmesi öneriliyor.
+                </div>
+                <div class="mock-card-actions">
+                  <button class="mock-btn mock-btn-primary">Kasaya Kaydet</button>
+                  <button class="mock-btn mock-btn-secondary">Yoksay</button>
+                </div>
+              </div>
+
+              <div class="mock-card card-animate-2">
+                <div class="mock-card-header">
+                  <span class="mock-card-tag tag-school">OKUL MATERYALİ</span>
+                  <span class="mock-card-time">5 dk önce</span>
+                </div>
+                <div class="mock-card-body">syllabus_database_systems_2026.pdf</div>
+                <div class="mock-card-recommendation">
+                  ⚡ Downloads klasöründen otomatik olarak yakalandı.
+                </div>
+                <div class="mock-card-actions">
+                  <button class="mock-btn mock-btn-primary">Kasaya Kaydet</button>
+                  <button class="mock-btn mock-btn-secondary">Yoksay</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Vault Stats Column -->
+            <div class="mock-column-right">
+              <div class="mock-section-title">Yerel SQLite Kasa Durumu</div>
+              <div class="vault-status-box">
+                <div class="vault-db-graphic">
+                  <svg class="db-icon animate-pulse-subtle" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M512 88L798 224C830 239 852 269 856 304C887 599 757 816 512 936C267 816 137 599 168 304C172 269 194 239 226 224L512 88Z"
+                      stroke="var(--accent)"
+                      stroke-width="76"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M512 260L609 524L512 820L415 524L512 260ZM512 474C484.386 474 462 496.386 462 524C462 551.614 484.386 574 512 574C539.614 574 562 551.614 562 524C562 496.386 539.614 474 512 474Z"
+                      fill="#FFFFFF"
+                    />
+                  </svg>
+                </div>
+                <div class="vault-title">SQLite Kasa Kilitsiz</div>
+                <div class="vault-meta">AES-256-GCM ile Cihazda Şifreli</div>
+                
+                <div class="vault-stats">
+                  <div class="stat-item">
+                    <span class="stat-val">1,248</span>
+                    <span class="stat-lbl">Not / Link</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-val">28</span>
+                    <span class="stat-lbl">Kategori</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mock-recent-saved-box">
+                <div class="mock-section-title-sub">Son Şifrelenenler</div>
+                <div class="saved-row">
+                  <span class="saved-icon">🔒</span>
+                  <span class="saved-text">docker run --name pg-db -e POSTGRES...</span>
+                  <span class="saved-time">12 dk</span>
+                </div>
+                <div class="saved-row">
+                  <span class="saved-icon">🔒</span>
+                  <span class="saved-text">https://buy.stripe.com/mock_pusula_pro</span>
+                  <span class="saved-time">25 dk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
