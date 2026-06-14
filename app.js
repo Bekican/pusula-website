@@ -362,52 +362,7 @@ function switchSpace(spaceKey, triggerElement) {
   if (triggerElement) triggerElement.classList.add('active');
 }
 
-// LICENSE KEY SIMULATOR VERIFICATION
-function verifyLicenseKey() {
-  const keyInput = document.getElementById('license-key-input');
-  const licenseKey = keyInput.value.trim().toUpperCase();
-  
-  if (!licenseKey) {
-    showToast("Lütfen lisans anahtarınızı girin.", "error");
-    return;
-  }
-  
-  // Pattern: PRO-XXXX-XXXX (Letters & Numbers)
-  const pattern = /^PRO-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-  
-  if (pattern.test(licenseKey) || licenseKey === "PRO-2026-OKUL" || licenseKey === "PRO-DEMO-TEST") {
-    // Pro card styling
-    const proCard = document.getElementById('pro-card');
-    if (proCard) {
-      proCard.classList.add('pricing-card-pro-active');
-      proCard.style.borderColor = '#10B981'; // Green accent
-      proCard.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.3)';
-      
-      const proBadge = proCard.querySelector('.pricing-card-pro::before');
-      if (proBadge) {
-        proBadge.textContent = 'LİSANSLI';
-        proBadge.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
-      }
-    }
-    
-    // Change price text
-    const priceVal = document.getElementById('pro-price-val');
-    if (priceVal) {
-      priceVal.innerHTML = 'AKTİF <span style="color: #10B981">✓ Pro Sürüm</span>';
-    }
-    
-    // Toast
-    showToast("Tebrikler! Pusula Pro lisansınız başarıyla aktif edildi. Masaüstü otomasyon sınırları kaldırıldı.", "success");
-    
-    // Notice text
-    const notice = document.querySelector('#license-simulator .verify-notice');
-    if (notice) {
-      notice.innerHTML = '<strong style="color: #10B981;">Lisans doğrulandı!</strong> Bu tarayıcıdaki deneme oturumunuz başarıyla Pro olarak eşleştirildi.';
-    }
-  } else {
-    showToast("Lisans anahtarı doğrulanamadı. Lütfen 'PRO-XXXX-XXXX' formatında girin.", "error");
-  }
-}
+// License verification simulator removed because app is free
 
 // EARLY ACCESS FORM
 function handleEarlyAccess(event) {

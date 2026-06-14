@@ -134,7 +134,6 @@
       <a href="#simulator" class="nav-link">Nasıl Çalışır</a>
       <a href="#spaces" class="nav-link">Alanlar</a>
       <a href="#security" class="nav-link">Güvenlik</a>
-      <a href="#pricing" class="nav-link">Fiyatlandırma</a>
       <button class="nav-cta" onclick="simulateDownload()">Ücretsiz İndir</button>
     </nav>
     <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Menüyü Aç/Kapat" onclick="toggleMobileMenu()">
@@ -151,7 +150,6 @@
       <a href="#simulator" class="mobile-nav-link" onclick="toggleMobileMenu()">Nasıl Çalışır</a>
       <a href="#spaces" class="mobile-nav-link" onclick="toggleMobileMenu()">Alanlar</a>
       <a href="#security" class="mobile-nav-link" onclick="toggleMobileMenu()">Güvenlik</a>
-      <a href="#pricing" class="mobile-nav-link" onclick="toggleMobileMenu()">Fiyatlandırma</a>
       <button class="mobile-nav-cta" onclick="simulateDownload(); toggleMobileMenu()">Ücretsiz İndir</button>
     </nav>
   </div>
@@ -171,9 +169,9 @@
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 10h3l-4 4-4-4h3V8h2v4z"/></svg>
         Ücretsiz İndir (Windows)
       </button>
-      <a href="#pricing" class="btn btn-secondary">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m0 0a2 2 0 01-2 2m2-2h3m-3 0V9M10 11a4 4 0 100-8 4 4 0 000 8zm0 0v2a2 2 0 002 2h2m0 0l2 2m-2-2l2-2"/></svg>
-        Pro Lisansı Al
+      <a href="#simulator" class="btn btn-secondary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Nasıl Çalışır?
       </a>
     </div>
     <div class="hero-visual">
@@ -340,7 +338,7 @@
                 </div>
                 <div class="saved-row">
                   <span class="saved-icon">🔒</span>
-                  <span class="saved-text">https://buy.stripe.com/mock_pusula_pro</span>
+                  <span class="saved-text">https://github.com/bekican/pusula-docs</span>
                   <span class="saved-time">25 dk</span>
                 </div>
               </div>
@@ -763,7 +761,6 @@
             <div class="flow-step-title">SQLite Kasa</div>
           </div>
         </div>
-        
         <div class="sec-schema-box">
           <div class="schema-header">// Pusula Kasa Şeması</div>
           <div class="schema-row"><span class="schema-key">depolama:</span> <span class="schema-val">"Cihazda-Yerel (SQLite)"</span></div>
@@ -771,86 +768,6 @@
           <div class="schema-row"><span class="schema-key">şifre_hash:</span> <span class="schema-val">"PBKDF2-SHA256"</span></div>
           <div class="schema-row"><span class="schema-key">telemetri:</span> <span class="schema-val">"Devre Dışı (Sıfır Bulut İletişimi)"</span></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING SECTION -->
-  <section id="pricing">
-    <div class="section-header">
-      <h2>Sade ve Şeffaf Fiyatlandırma</h2>
-      <p>Aylık abonelikler veya gizli ücretler yok. Sadece tek seferlik ödeme ile ömür boyu sahip olun.</p>
-    </div>
-    
-    <div class="pricing-grid">
-      <!-- Free Card -->
-      <div class="pricing-card">
-        <div class="price-title">Başlangıç (Ücretsiz)</div>
-        <p class="price-desc">Pusula'nın gücünü keşfetmek ve temel düzeni kurmak isteyenler için.</p>
-        <div class="price-val">0 TL <span>/ ömür boyu</span></div>
-        <button class="price-cta price-cta-free" onclick="simulateDownload()">Hemen İndir</button>
-        <ul class="price-features">
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            2 Çalışma Alanı (Spaces)
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            50 Kasa Kaydı (Snippets)
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            100 Görev (Tasks)
-          </li>
-          <li>Temel Otomasyon Servisleri</li>
-          <li>Akıllı RAG & PDF Özetleme</li>
-          <li>Çoklu Cihaz Eşleme (Sync)</li>
-        </ul>
-      </div>
-      
-      <!-- Pro Card -->
-      <div class="pricing-card pricing-card-pro" id="pro-card">
-        <div class="price-title">Pusula Pro</div>
-        <p class="price-desc">Limit olmadan tamamen otomatik, akıllı ve senkronize bir düzen arayanlar için.</p>
-        <div class="price-val" id="pro-price-val">249 TL <span>/ tek seferlik</span></div>
-        <button class="price-cta price-cta-pro" onclick="window.open('https://buy.stripe.com/mock_pusula_pro', '_blank')">Pro Lisansı Al</button>
-        <ul class="price-features">
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Limitsiz Çalışma Alanı
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Limitsiz Kasa Kaydı & Görevler
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Rust-Native Tam Pano & Klasör Otomasyonu
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Akıllı RAG & PDF Özetleme (Yapay Zeka)
-          </li>
-          <li class="included">
-            <svg class="feature-check" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Çoklu Cihaz Eşleme (AES-GCM Sync)
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <!-- Active License trial box -->
-    <div class="pricing-verify-box" id="license-simulator">
-      <div class="verify-header">
-        <span class="verify-title">Lisansını Burada Test Et</span>
-        <a href="https://buy.stripe.com/mock_pusula_pro" class="verify-link" target="_blank">Lisans Anahtarı Al ↗</a>
-      </div>
-      <div class="verify-form">
-        <input type="text" id="license-key-input" class="verify-input" placeholder="PRO-XXXX-XXXX" value="PRO-2026-OKUL">
-        <button class="verify-btn" onclick="verifyLicenseKey()">Aktif Et</button>
-      </div>
-      <div class="verify-notice">
-        Buraya satın aldığınız Pro lisans kodunu girerek (veya varsayılan deneme kodunu kullanarak) Pro sürümün web sitemizde nasıl aktif olduğunu simüle edebilirsiniz.
       </div>
     </div>
   </section>
@@ -918,12 +835,12 @@
       <!-- FAQ Item 5 -->
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Pusula Pro lisansı abonelik tabanlı mı?
+          Pusula ücretli mi veya herhangi bir kullanım sınırı var mı?
           <svg class="faq-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            Hayır, Pusula Pro <strong>tek seferlik ödeme</strong> modeliyle satılır. Aylık veya yıllık abonelik ücreti yoktur. Bir kez satın alarak ömür boyu sınırsız kullanım hakkına sahip olursunuz.
+            Hayır. Pusula şu an için tamamen ücretsizdir ve herhangi bir özellik veya limit kısıtlaması bulunmamaktadır. Limitsiz çalışma alanı oluşturabilir, yerel yapay zeka ve cihazlar arası eşitleme gibi tüm gelişmiş özellikleri ücretsiz olarak kullanabilirsiniz.
           </div>
         </div>
       </div>
@@ -966,7 +883,6 @@
         <a href="#features" class="footer-link">Özellikler</a>
         <a href="#simulator" class="footer-link">Nasıl Çalışır</a>
         <a href="#security" class="footer-link">Güvenlik</a>
-        <a href="#pricing" class="footer-link">Fiyatlandırma</a>
       </div>
     </div>
     <div class="copyright">
