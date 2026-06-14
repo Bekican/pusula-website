@@ -23,4 +23,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://bekican.github.io/pusula-website/sitemap.xml
+Sitemap: https://pusulanote.xyz/sitemap.xml
