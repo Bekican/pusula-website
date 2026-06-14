@@ -94,7 +94,7 @@ function addVisualRecord(text, typeLabel) {
 // SIMULATOR PRESETS DATA
 const PRESETS = {
   link: {
-    text: "https://github.com/bekircan/data-structures-notes",
+    text: "https://github.com/bekican/data-structures-notes",
     kind: "link",
     source: "clipboard",
     sourceLabel: "Kopyaladın",
@@ -124,6 +124,22 @@ const PRESETS = {
     sourceLabel: "Hızlı not",
     recLabel: "Görev olarak önerilecek",
     tagLabel: "GÖREV"
+  },
+  sensitive: {
+    text: "api_key = 'sk-proj-4a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d'",
+    kind: "sensitive",
+    source: "clipboard",
+    sourceLabel: "Kopyaladın",
+    recLabel: "Hassas veri algılandı ve otomatik olarak bloke edildi. Cihaza veya kasaya kaydedilmez.",
+    tagLabel: "HASSAS VERİ"
+  },
+  note: {
+    text: "Pazartesi günü saat 14:00'da veri yapıları sunumu yapılacak.",
+    kind: "note",
+    source: "quick_capture",
+    sourceLabel: "Hızlı not",
+    recLabel: "Not olarak önerilecek",
+    tagLabel: "NOT"
   }
 };
 
@@ -142,6 +158,29 @@ function loadPreset(presetType) {
 // HEURISTIC AUTOMATION CLASSIFICATION (Matches desktop app logic in uxCopy.ts)
 function classifyInput(text) {
   const normalized = text.toLowerCase().trim();
+  
+  // Sensitive Data Check (Regex & String matching)
+  if (
+    normalized.includes('api_key') || 
+    normalized.includes('apikey') || 
+    normalized.includes('password') || 
+    normalized.includes('sifre') || 
+    normalized.includes('şifre') || 
+    normalized.includes('secret') || 
+    normalized.includes('token') || 
+    normalized.includes('bearer ') || 
+    normalized.includes('private_key') ||
+    normalized.includes('ghp_') || // Github token
+    normalized.startsWith('sk-')  // OpenAI api key
+  ) {
+    return {
+      kind: "sensitive",
+      sourceLabel: "Güvenlik Engeli",
+      recLabel: "Hassas veri algılandı ve otomatik olarak bloke edildi. Cihaza veya kasaya kaydedilmez.",
+      tagLabel: "HASSAS VERİ",
+      tagClass: "tag-sensitive"
+    };
+  }
   
   if (normalized.startsWith('http://') || normalized.startsWith('https://') || normalized.includes('www.')) {
     return {
@@ -214,12 +253,14 @@ function triggerCapture(presetData = null) {
   let classification;
   if (presetData) {
     classification = {
+      kind: presetData.kind,
       sourceLabel: presetData.sourceLabel,
       recLabel: presetData.recLabel,
       tagLabel: presetData.tagLabel,
       tagClass: presetData.kind === 'link' ? 'tag-link' : 
                  presetData.kind === 'academic_material_candidate' ? 'tag-school' :
-                 presetData.kind === 'task' ? 'tag-task' : 'tag-note'
+                 presetData.kind === 'task' ? 'tag-task' : 
+                 presetData.kind === 'sensitive' ? 'tag-sensitive' : 'tag-note'
     };
   } else {
     classification = classifyInput(text);
@@ -250,7 +291,10 @@ function triggerCapture(presetData = null) {
   inbox.insertBefore(loader, inbox.firstChild);
   
   // Toast alerting classification progress
-  showToast(`Otomasyon algıladı: "${classification.sourceLabel}" verisi yapay zeka ile analiz ediliyor...`, 'info');
+  const toastMsg = classification.kind === 'sensitive' 
+    ? `Güvenlik kuralı tetiklendi: Hassas veri süzgeci çalıştırılıyor...`
+    : `Otomasyon algıladı: "${classification.sourceLabel}" verisi yapay zeka ile analiz ediliyor...`;
+  showToast(toastMsg, classification.kind === 'sensitive' ? 'error' : 'info');
   
   // Simulated processing delay
   setTimeout(() => {
@@ -260,7 +304,8 @@ function triggerCapture(presetData = null) {
     
     // Create Card Element
     const card = document.createElement('div');
-    card.className = 'captured-card';
+    const isSensitive = classification.kind === 'sensitive';
+    card.className = `captured-card ${isSensitive ? 'card-sensitive' : ''}`;
     card.id = cardId;
     
     card.innerHTML = `
@@ -270,14 +315,18 @@ function triggerCapture(presetData = null) {
           <span class="card-source">${classification.sourceLabel}</span>
         </div>
       </div>
-      <div class="card-body">${escapeHTML(text)}</div>
+      <div class="card-body ${isSensitive ? 'blur-text' : ''}" ${isSensitive ? 'title="Hassas veri: Görmek için üzerine gelin"' : ''}>${escapeHTML(text)}</div>
       <div class="card-recommendation">
-        <span class="rec-dot"></span>
+        <span class="rec-dot ${isSensitive ? 'rec-dot-red' : ''}"></span>
         <span>${classification.recLabel}</span>
       </div>
       <div class="card-actions">
-        <button class="action-btn action-btn-primary" onclick="saveToVault('${cardId}')">Kasaya Kaydet</button>
-        <button class="action-btn action-btn-secondary" onclick="discardCaptured('${cardId}')">Yoksay</button>
+        ${isSensitive 
+          ? `<button class="action-btn action-btn-disabled" disabled>Kaydedilemez 🔒</button>
+             <button class="action-btn action-btn-secondary" onclick="discardCaptured('${cardId}')">Temizle</button>`
+          : `<button class="action-btn action-btn-primary" onclick="saveToVault('${cardId}')">Kasaya Kaydet</button>
+             <button class="action-btn action-btn-secondary" onclick="discardCaptured('${cardId}')">Yoksay</button>`
+        }
       </div>
     `;
     
@@ -285,7 +334,11 @@ function triggerCapture(presetData = null) {
     inbox.insertBefore(card, inbox.firstChild);
     
     // Success toast
-    showToast(`Veri başarıyla sınıflandırıldı: ${classification.tagLabel}`, 'success');
+    if (isSensitive) {
+      showToast(`Hassas veri engellendi! Kasaya veya diske kaydedilmeyecek.`, 'error');
+    } else {
+      showToast(`Veri başarıyla sınıflandırıldı: ${classification.tagLabel}`, 'success');
+    }
   }, 750);
 }
 

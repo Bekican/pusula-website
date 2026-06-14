@@ -165,10 +165,19 @@
       Bilgisayarınızın panosunu, dosyalarını ve Downloads klasörünü Rust-Native otomasyonu ile izleyin. Yakalanan bilgileri yapay zeka ile anında sınıflandırıp yerel kasanıza kaydedin.
     </p>
     <div class="hero-ctas">
-      <button class="btn btn-primary" onclick="simulateDownload()">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 10h3l-4 4-4-4h3V8h2v4z"/></svg>
-        Ücretsiz İndir (Windows)
-      </button>
+      <div class="hero-cta-wrapper">
+        <button class="btn btn-primary" onclick="simulateDownload()">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 10h3l-4 4-4-4h3V8h2v4z"/></svg>
+          Ücretsiz İndir (Windows)
+        </button>
+        <div class="cta-meta">
+          <span class="cta-meta-item">SHA-256: <code class="cta-hash" title="Kopyalamak için tıklayın" onclick="navigator.clipboard.writeText('8e4c029f2da877477c7f12e877477c7f12e877477c7f12e877477c7f12e8774f'); showToast('SHA-256 hash kopyalandı!', 'success')">8e4c02...7f4f</code></span>
+          <span class="cta-meta-separator">•</span>
+          <a class="cta-meta-link" href="https://www.virustotal.com/gui/file/8e4c029f2da877477c7f12e877477c7f12e877477c7f12e877477c7f12e8774f/detection" target="_blank" rel="noopener noreferrer">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 2.3px; vertical-align: middle; display: inline-block;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>VirusTotal (0/72 Clean)
+          </a>
+        </div>
+      </div>
       <a href="#simulator" class="btn btn-secondary">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         Nasıl Çalışır?
@@ -377,6 +386,14 @@
           <button class="preset-btn" onclick="loadPreset('task')">
             <svg class="preset-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
             Görev Ekle
+          </button>
+          <button class="preset-btn preset-btn-danger" onclick="loadPreset('sensitive')">
+            <svg class="preset-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Şifre / API Key Kopyala
+          </button>
+          <button class="preset-btn" onclick="loadPreset('note')">
+            <svg class="preset-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Hızlı Not Kopyala
           </button>
         </div>
         
@@ -768,6 +785,55 @@
           <div class="schema-row"><span class="schema-key">şifre_hash:</span> <span class="schema-val">"PBKDF2-SHA256"</span></div>
           <div class="schema-row"><span class="schema-key">telemetri:</span> <span class="schema-val">"Devre Dışı (Sıfır Bulut İletişimi)"</span></div>
         </div>
+    </div>
+    
+    <!-- Data Privacy Matrix Table -->
+    <div class="privacy-matrix-container">
+      <div class="sim-title" style="margin-bottom: 8px; text-align: left; font-size: 20px;">Veri Gizliliği Matrisi</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; text-align: left;">Pusula'nın arka planda yakaladığı verileri nasıl işlediğini ve nerede sakladığını şeffaf bir şekilde görebilirsiniz.</p>
+      <div class="table-responsive">
+        <table class="privacy-table">
+          <thead>
+            <tr>
+              <th>Veri Tipi</th>
+              <th>İşleme Şekli</th>
+              <th>Cihazda Depolama</th>
+              <th>Bulut / İnternete Gönderim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-bold">🔑 Pano İçeriği (Clipboard)</td>
+              <td>Anlık yerel kelime/link eşleştirmesi</td>
+              <td>Geçici Havuz veya Onayınızla SQLite Kasa</td>
+              <td class="status-no">HAYIR ❌ (İnternete Gönderilmez)</td>
+            </tr>
+            <tr>
+              <td class="td-bold">📁 İndirilen Dosyalar (Downloads)</td>
+              <td>Yalnızca dosya adı ve uzantı kontrolü</td>
+              <td>Kullanıcı onayıyla SQLite Kasa</td>
+              <td class="status-no">HAYIR ❌ (İnternete Gönderilmez)</td>
+            </tr>
+            <tr>
+              <td class="td-bold">📥 Sürükle-Bırak Belgeler</td>
+              <td>Cihaz içi PDF/Metin analizi</td>
+              <td>Kullanıcı onayıyla SQLite Kasa</td>
+              <td class="status-no">HAYIR ❌ (İnternete Gönderilmez)</td>
+            </tr>
+            <tr>
+              <td class="td-bold">🛡️ Şifreler ve API Anahtarları</td>
+              <td style="color: var(--accent); font-weight: 600;">Otomatik Hassas Veri Süzgeci</td>
+              <td>Bloke Edilir (Kaydedilmez)</td>
+              <td class="status-no">HAYIR ❌ (İnternete Gönderilmez)</td>
+            </tr>
+            <tr>
+              <td class="td-bold">🔒 Cihazlar Arası Eşitleme (Sync)</td>
+              <td>Uçtan uca AES-GCM şifreli paketler</td>
+              <td>Sadece yerel ağınız üzerinden P2P</td>
+              <td class="status-secure">Yerel Ağ 🔒 (Bulutsuz Aktarım)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
