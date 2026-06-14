@@ -74,6 +74,8 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-app);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -1735,6 +1737,60 @@ footer {
   .sec-grid {
     grid-template-cols: 1fr;
   }
+
+  h1 {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .hero-cta-wrapper {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-cta-wrapper .btn {
+    width: 100%;
+  }
+
+  .hero-ctas .btn-secondary {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .spaces-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .spaces-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-trigger {
+    flex-shrink: 0;
+  }
+
+  .ea-panel {
+    padding: 24px 16px;
+  }
 }
 
 /* ==========================================================================
@@ -2094,6 +2150,20 @@ footer {
   .tech-specs-grid {
     grid-template-cols: 1fr;
   }
+
+  .sim-quick-presets {
+    grid-template-cols: 1fr;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-actions .action-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* ==========================================================================
@@ -2308,7 +2378,9 @@ footer {
   border-radius: var(--radius-sm);
   font-size: 11px;
   color: var(--text-tertiary);
-  width: 260px;
+  width: 100%;
+  max-width: 260px;
+  min-width: 100px;
 }
 
 .mock-badge-pro {
