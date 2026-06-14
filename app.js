@@ -126,7 +126,7 @@ const PRESETS = {
     tagLabel: "GÖREV"
   },
   sensitive: {
-    text: "api_key = 'sk-proj-4a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d'",
+    text: "api_key = 'sk-proj-MOCK_OPENAI_API_KEY_DO_NOT_LEAK_TEST_ONLY'",
     kind: "sensitive",
     source: "clipboard",
     sourceLabel: "Kopyaladın",
